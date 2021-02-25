@@ -9,10 +9,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Django Calulator</title>
+    <title>Django Calculator</title>
   </head>
   <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="#">Django Calculator</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -24,18 +24,42 @@
             <li class="nav-item">
               <a class="nav-link" href="#about">About</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#instruction">Instruction</a>
+            </li>
             
           </ul>
           
         </div>
       </nav>
-      <div class="container-fluid" style="margin-bottom: 40rem;">
+      <div class="container-fluid" style="margin-bottom:inherit;">
+          <div  class="row">
+            <div class="col-md-6 " style="margin: 4rem auto 0 auto;" ;>
+              {% if error %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong> Error</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {% endif%}
+              {% if result %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong> {{q}} = {{ans}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div> 
+              {% endif  %}             
+            </div>
+            
+          </div>
           <div class="row">
               <div class="col-md-6" style="margin: 1rem auto 0 auto;">
                 <img class="img-fluid" src="{% static  'calc2.jpg' %}">
                   <div class="card">
                       <div class="card-body">
-                          <form method="GET" action="#">
+                          <form method="GET" action="{% url 'submitquery' %}">
                               <div class="form-group">
                                   <input class="form-control" type="search" name="query" id="query">
                               </div>
@@ -65,6 +89,25 @@
               </div>
           </div>
       </div>
+      <div class="row">
+        <div class="col-6" style="margin:2rem auto 0 auto;">
+            <p class="display-4" id="instruction" name="instruction" style="text-align: center;">
+                 Instruction
+            </p>
+            <hr>
+            <ul class="list-group">
+              <li class="list-group-item">+ Addition</li>
+              <li class="list-group-item">- Subtraction</li>
+              <li class="list-group-item">* Multiplication</li>
+              <li class="list-group-item">/ Division</li>
+              <li class="list-group-item">// Floor Division</li>
+              <li class="list-group-item">**  Exponential</li>
+              <li class="list-group-item">% Modulus</li>
+              <li class="list-group-item">() Parenthesis</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
       <div class="container-fluid " >
           <div class="row">
